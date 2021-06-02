@@ -1,69 +1,105 @@
 <div style="text-align: center;">
-    <h1>{{title}}</h1>
+  <h1 style="font-weight: bold;">{{title}}</h1>
 </div>
+<div>
+  <h2>"Notes:"</h2>
+  <span class="tab"></span><b>1. Drive will be happening in Bangalore, employee's staying in Bangalore can register </b><br><br>
+  <span class="tab"></span>2.  For Dose 1, vaccine preference will not be provided, it will be purely based on the availability<br><br>
+  <span class="tab"></span>3.   If you don't know your Employee ID, please refer to workday<br><br>
+  <span class="tab"></span>4.  If you want to edit your information, please contact HR
+
+</div>
+<br>
+<br>
+<br>
 
 <form [formGroup]="empForm" (ngSubmit)="onSubmit()">
 
   <div class="col-lg-12" formArrayName="user">
-
     <div class="col-lg-12"  *ngFor="let employee of employees().controls; let empIndex=index">
-
       <div class="col-lg-12"  [formGroupName]="empIndex" >
         <div style="padding: 1rem;" class="col-lg-12">
-            <div class="col-lg-12 row">
-                <div class="col-lg-6">
-                    <div class="col-lg-12 row " style="padding: 0.5rem;">
-                        <div class="col-lg-6">ID:</div>
-                        <div class="col-lg-6"><input type="text" formControlName="id"></div>
-                    </div>
-                    <div class="col-lg-12 row " style="padding: 0.5rem;">
-                        <div class="col-lg-6">Name:</div>
-                        <div class="col-lg-6"><input type="text" formControlName="name"></div>
-                    </div>
-                    <div class="col-lg-12 row " style="padding: 0.5rem;">
-                        <div class="col-lg-6">Age:</div>
-                        <div class="col-lg-6">
-                            <input type="number" min="18" formControlName="age">
-                        </div>
-                    </div>
-                    <div class="col-lg-12 row " style="padding: 0.5rem;">
-                        <div class="col-lg-6">Location:</div>
-                        <div class="col-lg-6"><input type="text" formControlName="location"></div>
-                    </div>
+          <div class="col-lg-12 row">
+            <div class="col-lg-6">
+              <div class="col-lg-12 row " style="padding: 0.5rem;">
+                <div class="col-lg-6">Employee ID:</div>
+                <div class="col-lg-6"><input type="text" formControlName="id" placeholder="eg: 002685">
+                  <div class="alertInput" *ngIf="submitted && employee.controls.id.errors">
+                    <span *ngIf="employee.controls.id.errors.required">required</span>
+                  </div>
                 </div>
-                <div class="col-lg-6">
-                    <div class="col-lg-12 row " style="padding: 0.5rem;">
-                        <div class="col-lg-6">
-                            Gender:
-                        </div>
-                        <div class="col-lg-6 ">
-                            <select class="col-lg-6" id="country" formControlName="gender">
-                                <option *ngFor="let c of gender" [ngValue]="c">{{ c }}</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-lg-12 row " style="padding: 0.5rem;">
-                        <div class="col-lg-6">
-                            Dose:
-                        </div>
-                        <div class="col-lg-6">
-                            <select class="col-lg-6" id="country" formControlName="dose">
-                                <option *ngFor="let c of doses" [ngValue]="c">{{ c }}</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-lg-12 row" style="padding: 0.5rem;">
-                        <div class="col-lg-6">
-                            Vaccincation Preference:
-                        </div>
-                        <div class="col-lg-6">
-                            <select class="col-lg-6" id="country" formControlName="vaccine">
-                                <option *ngFor="let c of vaccination" [ngValue]="c">{{ c }}</option>
-                            </select>
-                        </div>
-                    </div>
+              </div>
+              <div class="col-lg-12 row " style="padding: 0.5rem;">
+                <div class="col-lg-6">Employee Name:</div>
+                <div class="col-lg-6"><input type="text" formControlName="name">
+                  <div class="alertInput" *ngIf="submitted && employee.controls.name.errors">
+                    <span *ngIf="employee.controls.name.errors.required">required</span>
+                  </div>
                 </div>
+              </div>
+              <div class="col-lg-12 row " style="padding: 0.5rem;">
+                <div class="col-lg-6">Employee Age:</div>
+                <div class="col-lg-6">
+                  <input type="number" min="18" formControlName="age">
+                  <div class="alertInput" *ngIf="submitted && employee.controls.age.errors">
+                    <span *ngIf="employee.controls.age.errors.required">required</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-12 row " style="padding: 0.5rem;">
+                <div class="col-lg-6">Current Location (City) :</div>
+                <div class="col-lg-6"><input type="text" formControlName="location" placeholder="eg: Bangalore">
+                  <div class="alertInput" *ngIf="submitted && employee.controls.location.errors">
+                    <span *ngIf="employee.controls.location.errors.required">required</span>
+                  </div>
+                </div>
+              </div>
             </div>
+            <div class="col-lg-6">
+              <div class="col-lg-12 row " style="padding: 0.5rem;">
+                <div class="col-lg-6">
+                  Gender:
+                </div>
+                <div class="col-lg-6 ">
+                  <select class="col-lg-6" id="country" formControlName="gender">
+                    <option value="" selected disabled hidden>Choose here</option>
+                    <option *ngFor="let c of gender" [ngValue]="c">{{ c }}</option>
+                  </select>
+                  <div class="alertInput" *ngIf="submitted && employee.controls.gender.errors">
+                    <span *ngIf="employee.controls.gender.errors.required">required</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-12 row " style="padding: 0.5rem;">
+                <div class="col-lg-6">
+                  Dose:
+                </div>
+                <div class="col-lg-6">
+                  <select class="col-lg-6" id="country" formControlName="dose">
+                    <option value="" selected disabled hidden>Choose here</option>
+                    <option *ngFor="let c of doses" [ngValue]="c">{{ c }}</option>
+                  </select>
+                  <div class="alertInput" *ngIf="submitted && employee.controls.dose.errors">
+                    <span *ngIf="employee.controls.dose.errors.required">required</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-12 row" style="padding: 0.5rem;">
+                <div class="col-lg-6">
+                  Vaccination Preference:
+                </div>
+                <div class="col-lg-6">
+                  <select class="col-lg-6" id="country" formControlName="vaccine">
+                    <option value="" selected disabled hidden>Choose here</option>
+                    <option *ngFor="let c of vaccination" [ngValue]="c">{{ c }}</option>
+                  </select>
+                  <div class="alertInput" *ngIf="submitted && employee.controls.vaccine.errors">
+                    <span *ngIf="employee.controls.vaccine.errors.required">required</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="col-lg-12" formArrayName="dependents" style="padding: 0rem;">
           <div class="col-lg-12" *ngFor="let skill of employeeSkills(empIndex).controls; let skillIndex=index;padding:1rem">
@@ -73,91 +109,104 @@
               </div>
               <div class="col-lg-10 row">
                 <div class="col-lg-6">
-                     <div class="col-lg-12 row " style="padding: 0.5rem;">
-                         <div class="col-lg-6">
-                            Name :
-                         </div>
-                         <div class="col-lg-6">
-                            <input class="col-lg-8" type="text" formControlName="name">
-                         </div>
-                     </div>
-                      <div class="col-lg-12 row " style="padding: 0.5rem;">
-                          <div class="col-lg-6">
-                            Age:
-                          </div >
-                          <div class="col-lg-6">
-                            <input class="col-lg-8" type="number" min="18" formControlName="age">
-                          </div>
+                  <div class="col-lg-12 row " style="padding: 0.5rem;">
+                    <div class="col-lg-6">
+                      Dependent Name :
+                    </div>
+                    <div class="col-lg-6">
+                      <input class="col-lg-8"  type="text" formControlName="name" placeholder="As per insurance">
+                      <div class="alertInput" *ngIf="submitted && skill.controls.name.errors">
+                        <span *ngIf="skill.controls.name.errors.required">required</span>
                       </div>
-                      <div class="col-lg-12 row " style="padding: 0.5rem;">
-                          <div class="col-lg-6">
-                            Gender :
-                          </div>
-                          <div class="col-lg-6">
-                            <select class="col-lg-8" id="country" formControlName="gender">
-                              <option *ngFor="let c of gender" [ngValue]="c">{{ c }}</option>
-                            </select>
-                          </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-12 row " style="padding: 0.5rem;">
+                    <div class="col-lg-6">
+                     Dependent Age :
+                    </div >
+                    <div class="col-lg-6">
+                      <input  type="number" value="18" class="col-lg-8" min="18" placeholder="18+" formControlName="age" >
+                      <div class="alertInput" *ngIf="submitted && skill.controls.age.errors">
+                        <span *ngIf="skill.controls.age.errors.required">required</span>
                       </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-12 row " style="padding: 0.5rem;">
+                    <div class="col-lg-6">
+                     Dependent Gender :
+                    </div>
+                    <div class="col-lg-6">
+                      <select class="col-lg-8" id="country" formControlName="gender">
+                        <option value="" selected disabled hidden>Choose here</option>
+                        <option *ngFor="let c of gender" [ngValue]="c">{{ c }}</option>
+                      </select>
+                      <div class="alertInput" *ngIf="submitted && skill.controls.gender.errors">
+                        <span *ngIf="skill.controls.gender.errors.required">required</span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <div class="col-lg-6">
-                    <div class="col-lg-12 row " style="padding: 0.5rem;">
-                        <div class="col-lg-6">
-                            RelationShip:
-                        </div>
-                        <div class="col-lg-6">
-                            <input class="col-lg-8" type="text" formControlName="relationship">
-                        </div>
+                  <div class="col-lg-12 row " style="padding: 0.5rem;">
+                    <div class="col-lg-6">
+                     Dependent Relationship:
                     </div>
-                      <div class="col-lg-12 row " style="padding: 0.5rem;">
-                        <div class="col-lg-6">
-                            Dose :
-                        </div>
-                        <div class="col-lg-6">
-                            <select class="col-lg-8" id="country" formControlName="dose">
-                                <option *ngFor="let c of doses" [ngValue]="c">{{ c }}</option>
-                            </select>
-                        </div>
-
-
+                    <div class="col-lg-6">
+                      <select class="col-lg-8" id="country" formControlName="relationship">
+                        <option value="" selected disabled hidden>Choose here</option>
+                        <option *ngFor="let c of relationShips" [ngValue]="c">{{ c }}</option>
+                      </select>
+                      <div class="alertInput" *ngIf="submitted && skill.controls.relationship.errors">
+                        <span *ngIf="skill.controls.relationship.errors.required">required</span>
                       </div>
-                      <div class="col-lg-12 row " style="padding: 0.5rem;">
-                        <div class="col-lg-6">
-                            Vaccine:
-                        </div>
-                        <div class="col-lg-6">
-                            <select class="col-lg-8" id="country" formControlName="vaccine">
-                                <option *ngFor="let c of vaccination" [ngValue]="c">{{ c }}</option>
-                            </select>
-                        </div>
-
-
+                    </div>
+                  </div>
+                  <div class="col-lg-12 row " style="padding: 0.5rem;">
+                    <div class="col-lg-6">
+                      Dose :
+                    </div>
+                    <div class="col-lg-6">
+                      <select class="col-lg-8" id="country" formControlName="dose">
+                        <option value="" selected disabled hidden>Choose here</option>
+                        <option *ngFor="let c of doses" [ngValue]="c">{{ c }}</option>
+                      </select>
+                      <div class="alertInput" *ngIf="submitted && skill.controls.dose.errors">
+                        <span *ngIf="skill.controls.dose.errors.required">required</span>
                       </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-12 row " style="padding: 0.5rem;">
+                    <div class="col-lg-6">
+                      Vaccine Preference:
+                    </div>
+                    <div class="col-lg-6">
+                      <select class="col-lg-8" id="country" formControlName="vaccine" >
+                        <option value="" selected disabled hidden>Choose here</option>
+                        <option *ngFor="let c of vaccination" [ngValue]="c">{{ c }}</option>
+                      </select>
+                      <div class="alertInput" *ngIf="submitted && skill.controls.vaccine.errors">
+                        <span *ngIf="skill.controls.vaccine.errors.required">required</span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="col-lg-1" style="text-align: center;padding-top: 3.5rem;">
                 <button (click)="removeEmployeeSkill(empIndex,skillIndex)">Remove</button>
               </div>
-
-
-
-
             </div>
-
           </div>
           <div style="padding: 1rem;">
-            <button type="button" (click)="addEmployeeSkill(empIndex)">Add Family Member</button>
-
-
+            <button type="button" (click)="addEmployeeSkill(empIndex)">Add Dependent</button>
           </div>
-
         </div>
       </div>
-
     </div>
   </div>
-  <div style="display:flex;justify-content: center;" >
-    <button type="submit" style="padding: 0.5rem 3rem;background: silver;" >Submit</button>
+  <div style="display:flex;justify-content: center;padding:1rem" >
+    <button type="submit" style="padding: 0.5rem 3rem;background: silver;" >Register</button>
   </div>
+  <br>
+  <br>
 
 </form>
